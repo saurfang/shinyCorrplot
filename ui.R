@@ -7,6 +7,7 @@
 
 library(shiny)
 library(markdown)
+library(corrplot)
 
 shinyUI(fluidPage(
 
@@ -70,6 +71,7 @@ shinyUI(fluidPage(
     mainPanel(
       tabsetPanel(
         tabPanel("Correlation", 
+                 checkboxGroupInput("variables", "Variables", c("")),
                  plotOutput("corrPlot"),
                  uiOutput("warning")),
         tabPanel("Data",

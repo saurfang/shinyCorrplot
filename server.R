@@ -30,7 +30,8 @@ shinyServer(function(input, output, session) {
   })
   
   numericColumns <- reactive({
-    sapply(dataset(), is.numeric)
+    df <- dataset()
+    colnames(df)[sapply(df, is.numeric)]
   })
   
   correlation <- reactive({
@@ -38,7 +39,7 @@ shinyServer(function(input, output, session) {
     if(is.null(data)) {
       NULL
     } else {
-      cor(dataset()[,numericColumns()], use = input$corUse, method = input$corMethod)
+      cor(dataset()[,input$variables], use = input$corUse, method = input$corMethod)
     }
   })
   
@@ -55,6 +56,11 @@ shinyServer(function(input, output, session) {
     val <- correlation()
     if(!is.null(val))
       updateNumericInput(session, "plotHclustAddrect", max = nrow(val))
+  })
+  
+  #Update variable selection
+  observe({
+    updateCheckboxGroupInput(session, "variables", choices = numericColumns(), selected = numericColumns(), inline = TRUE)
   })
   
   output$warning <- renderUI({
