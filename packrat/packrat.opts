@@ -1,0 +1,12 @@
+auto.snapshot: TRUE
+use.cache: TRUE
+print.banner.on.startup: auto
+vcs.ignore.lib: TRUE
+vcs.ignore.src: FALSE
+external.packages:
+    devtools
+    shinyapps
+    knitr
+    rmarkdown
+    yaml
+local.repos: 
