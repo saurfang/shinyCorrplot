@@ -45,7 +45,7 @@ shinyUI(fluidPage(
                                    eval(formals(corrplot)$type))),
       
       selectInput("plotOrder", "Reorder Correlation",
-                  c(eval(formals(corrplot)$order), "manual")),
+                  eval(formals(corrplot)$order)),
       conditionalPanel("input.plotOrder === 'hclust'",
                        wellPanel(
                          selectInput("plotHclustMethod", "Method",
