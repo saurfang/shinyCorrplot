@@ -36,7 +36,8 @@ shinyServer(function(input, output, session) {
   
   correlation <- reactive({
     data <- dataset()
-    if(is.null(data)) {
+    variables <- input$variables
+    if(is.null(data) || !length(intersect(variables, colnames(data)))) {
       NULL
     } else {
       cor(dataset()[,input$variables], use = input$corUse, method = input$corMethod)
@@ -66,12 +67,13 @@ shinyServer(function(input, output, session) {
   output$warning <- renderUI({
     val <- correlation()
     if(is.null(val)) {
-      tags$i("Waiting for data to be uploaded...")
+      tags$i("Waiting for data input...")
     } else {
       isNA <- is.na(val)
       if(sum(isNA)) {
       tags$div(
         tags$h4("Warning: The following pairs in calculated correlation have been converted to zero because they produced NAs!"),
+        helpText("Consider using an approriate NA Action to exclude missing data"),
         renderTable(expand.grid(attr(val, "dimnames"))[isNA,]))
       }
     }

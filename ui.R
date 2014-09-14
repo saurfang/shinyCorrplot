@@ -71,9 +71,11 @@ shinyUI(fluidPage(
     mainPanel(
       tabsetPanel(
         tabPanel("Correlation", 
-                 column(3, sortableCheckboxGroupInput("variables", "Variables", c(""))),
-                 column(6, 
-                        plotOutput("corrPlot"),
+                 column(3, 
+                        helpText("Choose the variables to display. Drag and drop to reorder."), 
+                        sortableCheckboxGroupInput("variables", "", c("Loading..."))),
+                 column(9, 
+                        plotOutput("corrPlot", height = 600),
                         uiOutput("warning"))
                  ),
         tabPanel("Data",
