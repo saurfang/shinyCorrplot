@@ -60,7 +60,8 @@ shinyServer(function(input, output, session) {
   
   #Update variable selection
   observe({
-    updateCheckboxGroupInput(session, "variables", choices = numericColumns(), selected = numericColumns(), inline = TRUE)
+    updateCheckboxGroupInput(session, "variables", choices = numericColumns(), selected = numericColumns())
+    #TODO: Make the list sortable if order is manual
   })
   
   output$warning <- renderUI({

@@ -52,7 +52,7 @@ shinyUI(fluidPage(
                                      eval(formals(corrplot)$hclust.method)),
                          numericInput("plotHclustAddrect", "Number of Rectangles", 3, 0, NA))),
       
-      hr(),
+      tags$hr(),
       checkboxInput("sigTest", "Significance Test"),
       conditionalPanel("input.sigTest",
                        numericInput("sigLevel", "Significane Level",
@@ -71,9 +71,11 @@ shinyUI(fluidPage(
     mainPanel(
       tabsetPanel(
         tabPanel("Correlation", 
-                 checkboxGroupInput("variables", "Variables", c("")),
-                 plotOutput("corrPlot"),
-                 uiOutput("warning")),
+                 column(3, sortableCheckboxGroupInput("variables", "Variables", c(""))),
+                 column(6, 
+                        plotOutput("corrPlot"),
+                        uiOutput("warning"))
+                 ),
         tabPanel("Data",
                  dataTableOutput("dataTable")),
         tabPanel("About",
