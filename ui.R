@@ -79,8 +79,12 @@ shinyUI(fluidPage(
       tabsetPanel(
         tabPanel("Correlation", 
                  column(3, 
+                        radioButtons("variablesStyle", "Style", c("Checkbox", "Selectize"), inline = T),
                         helpText("Choose the variables to display. Drag and drop to reorder."), 
-                        sortableCheckboxGroupInput("variables", "", c("Loading..."))),
+                        conditionalPanel("input.variablesStyle === 'Checkbox'",
+                                         sortableCheckboxGroupInput("variablesCheckbox", "", c("Loading..."))),
+                        conditionalPanel("input.variablesStyle === 'Selectize'",
+                                         sortableSelectizeInput("variables", "", c("Loading..."), multiple = T, options = list(plugins = list("remove_button"))))),
                  column(9, 
                         plotOutput("corrPlot", height = 600),
                         uiOutput("warning"))

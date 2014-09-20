@@ -61,7 +61,19 @@ shinyServer(function(input, output, session) {
   
   #Update variable selection
   observe({
-    updateCheckboxGroupInput(session, "variables", choices = numericColumns(), selected = numericColumns())
+    updateCheckboxGroupInput(session, "variablesCheckbox", choices = numericColumns(), selected = numericColumns())
+    
+    updateSelectInput(session, "variables", choices = numericColumns(), selected = numericColumns())
+  })
+  
+  #Link Variable Selection
+  observe({
+    if(input$variablesStyle == "Checkbox") {
+      updateCheckboxGroupInput(session, "variablesCheckbox", selected = isolate(input$vairables))
+    }
+  })
+  observe({
+    updateSelectInput(session, "variables", selected = input$variablesCheckbox)
   })
   
   output$warning <- renderUI({
