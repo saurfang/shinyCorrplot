@@ -26,5 +26,6 @@ sortableSelectizeInput <- function (..., options = NULL)
   options$plugins <- c(list("drag_drop"), options$plugins)
   
   # return label and select tag
-  attachDependencies(selectizeInput(..., options = options), list(jqueryUIDep))
+  input <- selectizeInput(..., options = options)
+  attachDependencies(input, c(htmlDependencies(input), list(jqueryUIDep)))
 }
