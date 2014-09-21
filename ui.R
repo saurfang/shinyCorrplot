@@ -79,7 +79,7 @@ shinyUI(fluidPage(
       tabsetPanel(
         tabPanel("Correlation", 
                  column(3, 
-                        radioButtons("variablesStyle", "Style", c("Checkbox", "Selectize"), inline = T),
+                        radioButtons("variablesStyle", "Variable Selection Style", c("Checkbox", "Selectize"), inline = T),
                         helpText("Choose the variables to display. Drag and drop to reorder."), 
                         conditionalPanel("input.variablesStyle === 'Checkbox'",
                                          sortableCheckboxGroupInput("variablesCheckbox", "", c("Loading..."))),
