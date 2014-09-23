@@ -10,6 +10,8 @@ library(markdown)
 library(corrplot)
 
 shinyUI(fluidPage(
+  
+  tags$head(tags$script(src = "js/google-analytics.js")),
 
   # Application title
   titlePanel(list("Correlation Matrix with", tags$i("corrplot"))),
